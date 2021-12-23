@@ -58,7 +58,7 @@ spec:
           imagePullPolicy: Never
           command: ['/bin/bash', '-c']
           # args: ['cp -r /var/www/html/sites/default/files /mnt/data; chown www-data:www-data /mnt/data/ -R']
-          args: ['composer install -d /var/www/html -n; chown -R www-data:www-data /var/www/html/web; chmod 755 /var/www/html/web/sites/default/files; cd /usr/sbin/ && ln -s /var/www/html/vendor/drush/drush/drush drush']
+          args: ['composer install -d /var/www/html -n; chown -R www-data:www-data /var/www/html/web; chmod 755 /var/www/html/web/sites/default; cd /usr/sbin/ && ln -s /var/www/html/vendor/drush/drush/drush drush']
           volumeMounts:
             - mountPath: /var/www/html/sites/default/files
               name: drupal-files
