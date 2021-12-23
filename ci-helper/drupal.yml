@@ -29,7 +29,6 @@ metadata:
   name: drupal-files-pvc
   namespace: kubeappdrupal
 spec:
-  # storageClassName: local
   accessModes:
     - ReadWriteOnce
   resources:
@@ -57,10 +56,9 @@ spec:
           image: 'kubeappd9:latest'
           imagePullPolicy: Never
           command: ['/bin/bash', '-c']
-          # args: ['cp -r /var/www/html/sites/default/files /mnt/data; chown www-data:www-data /mnt/data/ -R']
-          args: ['composer install -d /var/www/html -n; chown -R www-data:www-data /var/www/html/web; chmod 755 /var/www/html/web/sites/default; cd /usr/sbin/ && ln -s /var/www/html/vendor/drush/drush/drush drush']
+          args: ['cp -r /var/www/html/sites/default/files /data; chown www-data:www-data /data/ -R']
           volumeMounts:
-            - mountPath: /var/www/html/sites/default/files
+            - mountPath: /data
               name: drupal-files
       containers:
         - name: drupal
@@ -71,11 +69,11 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 80
-            initialDelaySeconds: 100
+            initialDelaySeconds: 30
           readinessProbe:
             tcpSocket:
               port: 80
-            initialDelaySeconds: 100
+            initialDelaySeconds: 10
           volumeMounts:
             - mountPath: /var/www/html/sites/default/
               name: drupal-settings
