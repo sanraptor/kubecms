@@ -1,0 +1,15 @@
+/vendor/
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/sites/default/files
+/web/web.config
+/web/update.php
+/web/index.php
+/web/autoload.php
+/web/.ht.router.php
+/web/.csslintrc
+/web/.eslintignore
+/web/.eslintrc.json
+/web/example.gitignore
