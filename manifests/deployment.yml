@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: sanraptorkubecms 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sanraptorkubecms
+  template:
+    metadata:
+      labels:
+        app: sanraptorkubecms 
+    spec:
+      containers:
+        - name: sanraptorkubecms 
+          image: kubeappdrupal.azurecr.io/sanraptorkubecms
+          ports:
+          - containerPort: 80
