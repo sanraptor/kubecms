@@ -1,0 +1,15 @@
+FROM webdevops/php-nginx:8.0
+
+ADD nginx.conf /opt/docker/etc/nginx/conf.d/default.conf
+COPY drop /opt/drupal
+
+WORKDIR /opt/drupal
+
+
+RUN set -eux; \
+	composer install; \
+	chown -R www-data:www-data web/sites web/modules web/themes; \
+	rmdir /var/www/html; \
+	ln -sf /opt/drupal/web /var/www/html;
+
+ENV PATH=${PATH}:/opt/drupal/vendor/bin

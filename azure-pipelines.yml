@@ -1,0 +1,43 @@
+name: $(Rev:r)
+variables:
+  - name: acrRepositoryName
+    value: 'cms_hub/dev/cms_service'
+  - name: acrName
+    value: 'kubeappdrupal'
+  - name: runNumber
+    value: $(Build.BuildNumber)
+  - name: helmReleaseName
+    value: 'helm-cms'
+  - name: releaseName
+    value: release
+  - name: buildName
+    value: release
+  - name: major
+    value: '1'
+  - name: minor
+    value: '0'
+  - name: isDevelopment
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/development')]
+
+pool:
+  vmImage: 'agentpool'
+
+stages:
+  - stage: 'Build'
+    condition: and(succeeded(), (eq(variables['isDevelopment'],true)))
+    displayName: 'Build'
+    jobs:
+      - job: 'Build'
+        displayName: 'Build'
+        steps:
+          - template: ci-helper/stages/build.yml
+
+  - stage: 'DockerizeDeploy'
+    condition: and(succeeded(), (eq(variables['isDevelopment'],true)))
+    displayName: 'Image Creation'
+    jobs:
+      - job: 'CreateImage'
+        variables:
+          patch: $[counter(variables['major'].variables[minor], 0)]
+        steps:
+          - template: ci-helper/stages/dockerbuild.yml

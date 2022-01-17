@@ -1,0 +1,25 @@
+dockerImage: "kubeappdrupal.azurecr.io/cms_hub/dev/cms_service"
+dockerTag: "imageVersion"
+replicas: 1
+replicasMax: 1
+cpuTargetPercentage: 70
+ingress:
+  name: kubeapp
+  domain: drupal
+  # subdomain:
+  # envdomain:
+  # cluster:
+  # tls_certificate:
+  # ssl:
+  # metric:
+  # access_public:
+  # proxybodysize:
+namespace: kubeappdrupal
+resources:
+  limits:
+    memory: "500Mi"
+    cpu: "2"
+  requests:
+    memory: "500Mi"
+    cpu: "2"
+environment: dev

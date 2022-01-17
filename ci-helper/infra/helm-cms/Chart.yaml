@@ -1,0 +1,10 @@
+apiVersion: v1
+name: cms-service
+version: 1
+description: This is Drupal CMS Service
+home: https://github.com/sanraptor/kubecms
+sources:
+  - https://github.com/sanraptor/kubecms
+maintainers:
+  - name: Shubham Saurav Prasad
+    email: shubhamsprasad@yahoo.com

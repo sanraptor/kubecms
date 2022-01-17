@@ -1,0 +1,20 @@
+  steps:
+    - download: current
+      artifact: variables
+
+    - bash: |
+            version=$(cat $(Pipeline.Workspace)/variables/version)
+            echo "##vso[task.setvariable variable=version]$version"
+
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: 'Pay-As-You-Go-AKS'
+        namespace: 'kubeappdrupal'
+        command: 'upgrade'
+        chartType: 'FilePath'
+        chartPath: 'ci-helper/infra/$(helmReleaseName)'
+        releaseName: '$(helmReleaseName)'
+        overrideValues: 'dockerTag=v$(version)'
+        valueFile: 'ci-helper/infra/$(helmReleaseName)/values.yaml'
+        force: true

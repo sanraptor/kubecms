@@ -1,0 +1,11 @@
+        steps:
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Agent.BuildDirectory)/s/backend'
+              Contents: '**'
+              TargetFolder: '$(build.artifactstagingdirectory)'
+              Overwrite: true
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(build.artifactstagingdirectory)'
+              ArtifactName: drop
