@@ -24,7 +24,7 @@ pool:
 
 stages:
   - stage: 'Build'
-    condition: and(succeeded(), (eq(variables['isDevelopment'],true)))
+    condition: and(succeeded(), eq(variables['isDevelopment'],true))
     displayName: 'Build'
     jobs:
       - job: 'Build'
@@ -33,7 +33,7 @@ stages:
           - template: ci-helper/stages/build.yml
 
   - stage: 'DockerizeDeploy'
-    condition: and(succeeded(), (eq(variables['isDevelopment'],true)))
+    condition: and(succeeded(), eq(variables['isDevelopment'],true))
     displayName: 'Image Creation'
     jobs:
       - job: 'CreateImage'
