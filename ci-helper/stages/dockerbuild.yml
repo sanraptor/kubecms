@@ -7,7 +7,7 @@
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '.'
-          - scripts: |
+          - script: |
                      echo 'Creating docker image'
                      ls drop/
                      mv drop ./ci-helper/docker
